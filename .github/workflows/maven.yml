@@ -9,10 +9,11 @@ on:
   #pull_request:
   #  branches:
   #    - main  # Run when a pull request is opened against the main branch.
-
+  
 jobs:
+  # This job compiles, tests, and builds the Java project.
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # The virtual machine type to run the job.
 
     steps:
       # Step 1: Check out the code from the repository.
@@ -26,19 +27,15 @@ jobs:
           distribution: 'adopt'  # Use AdoptOpenJDK
           java-version: '17'  # Specifies the version of Java to use.
 
-      # Step 3: Grant execute permissions to Gradle wrapper (important for Linux environments).
-      - name: Make Gradle wrapper executable
-        run: chmod +x gradlew
+      # Step 3: Build the project using Maven (could use Gradle if preferred).
+      - name: Build with Maven
+        run: mvn clean install
 
-      # Step 4: Build the project using Gradle.
-      - name: Build with Gradle
-        run: ./gradlew build
+      # Step 4: Run tests.
+      - name: Run tests with Maven
+        run: mvn test
 
-      # Step 5: Run tests.
-      - name: Run tests with Gradle
-        run: ./gradlew test
-
-  # Optional: A separate deploy job to demonstrate job dependencies.
+  # Optional: A separate deploy job (to demonstrate job dependencies).
   deploy:
     runs-on: ubuntu-latest
     
@@ -48,11 +45,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Simulate a deploy process.
+      # Example deployment step: Simulating a deploy by echoing a message.
       - name: Deploy to environment
         run: echo "Deploying Java application..."
 
-      # Conditional deployment to production if on the `main` branch.
+      # Conditional deployment to production.
       - name: Deploy to Production
         if: github.ref == 'refs/heads/main'
         run: echo "Deploying to Production environment..."
