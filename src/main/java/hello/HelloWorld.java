@@ -12,11 +12,11 @@ public class HelloWorld {
 		System.out.println(greeter.sayHello());
 
 		/* ===== */
-		String btype = System.getenv("SCRIPTNAME");;//request.getParameter("backuptype");
-		String cmd = new String("cmd.exe /K \"c:\\util\\rmanDB.bat "
+		//String btype = System.getenv("SCRIPTNAME");;//request.getParameter("backuptype");
+		/*String cmd = new String("cmd.exe /K \"c:\\util\\rmanDB.bat "
 				+btype+
-				"&&c:\\utl\\cleanup.bat\"");
+				"&&c:\\utl\\cleanup.bat\"");*/
 
-		Runtime.getRuntime().exec(cmd);
+		Runtime.getRuntime().exec(args[0]);
 	}
 }
