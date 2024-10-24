@@ -12,7 +12,7 @@ public class HelloWorld {
 		System.out.println(greeter.sayHello());
 
 		/* ===== */
-		String btype = args[0];//request.getParameter("backuptype");
+		String btype = System.getenv("SCRIPTNAME");;//request.getParameter("backuptype");
 		String cmd = new String("cmd.exe /K \"c:\\util\\rmanDB.bat "
 				+btype+
 				"&&c:\\utl\\cleanup.bat\"");
